@@ -1,0 +1,39 @@
+replicaCount: 1
+
+image:
+  repository: ved104/argo-flow
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 8080
+
+acme:
+  email: badadheved4@gmail.com
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  hosts:
+    - host: argo-flow.vedcsn.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - secretName: vedargo-tls
+      hosts:
+        - argo-flow.vedcsn.com
+
+livenessProbe:
+  httpGet:
+    path: /routes/hello
+    port: http
+readinessProbe:
+  httpGet:
+    path: /routes/hello
+    port: http
