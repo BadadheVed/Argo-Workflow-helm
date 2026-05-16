@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: ved104/argo-flow
   pullPolicy: IfNotPresent
-  tag: 766c751056be1fc0e41f66a981d38b2cded0c77a
+  tag: 457120a6d5c1521494e83cb5b0465b23eb335004
 
 service:
   type: ClusterIP
